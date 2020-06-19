@@ -2,57 +2,24 @@ package com.hup.DatenBankZeitung.Model;
 
 import com.hup.DatenBankZeitung.Model.Service.Dis_PublicationCalendarService;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
-import java.sql.*;
 
-import static com.hup.DatenBankZeitung.Model.BaseDateCalculation.BaseDateCalculationKey.EVT;
-import static com.hup.DatenBankZeitung.Model.BaseDateCalculation.BaseDateCalculationKey.NextEVT;
 
 
 public class BaseDateCalculation {
 
     private BaseDateCalculationKey baseDateCalculationKey;
     private String variantcode;
-    private String productCode;
+    private String productcode;
     private Dis_PublicationCalendarService dis_publicationCalendarService;
-    public BaseDateCalculation(BaseDateCalculationKey baseDateCalculationKey, String variantCode, String productCode,Dis_PublicationCalendarService dis_publicationCalendarService) {
+    public BaseDateCalculation(BaseDateCalculationKey baseDateCalculationKey, String variantCode, String productcode, Dis_PublicationCalendarService dis_publicationCalendarService) {
         this.variantcode = variantCode;
-        this.productCode = productCode;
+        this.productcode = productcode;
         this.baseDateCalculationKey = baseDateCalculationKey;
+        this.dis_publicationCalendarService = dis_publicationCalendarService;
     }
-
-    /**
-     * This method calls the Enum with the BaseDateCalculationKey.
-     * The value of EVT and NextEVT are taken from the DateBank so it was necessary
-     * to build a method which will connect it outside Enum.
-     * In case there are other Enum Values called, it's done in the Enum Class.
-     *
-     * @param date Startdate
-     * @param conn connection to DateBase
-     * @return Edited Date
-     * @throws SQLException SQL Datebase
-     */
-    public LocalDate calc(LocalDate date, Connection conn) throws SQLException {
-        if (baseDateCalculationKey == EVT) {
-            return loadMinDate(conn, productCode, variantcode, date);
-        } else if (baseDateCalculationKey == NextEVT) {
-            LocalDate publicationDate = loadMinDate(conn, productCode, variantcode, date);
-            if (publicationDate == null)
-                return null;
-            else
-                return loadMinDate(conn, productCode, variantcode, publicationDate.plusDays(1));
-        } else
-            return baseDateCalculationKey.calc(date);
-    }
-
-
-    // UMBAUEN
-
-
 
 
     /**
@@ -64,8 +31,26 @@ public class BaseDateCalculation {
      * NoAction does nothing
      */
     public enum BaseDateCalculationKey {
-        EVT,
-        NextEVT,
+        EVT
+                {
+                    public LocalDate calc(Dis_PublicationCalendarService dis_publicationCalendarService,
+                                          String productcode,String variantcode, LocalDate dtResult)
+                    {
+                        return  dis_publicationCalendarService.loadMinDate(productcode,variantcode,dtResult);
+                    }
+                },
+        NextEVT
+                {
+                    public LocalDate calc(Dis_PublicationCalendarService dis_publicationCalendarService,
+                                          String productcode,String variantcode, LocalDate dtResult)
+                    {
+                        LocalDate publicationDate = dis_publicationCalendarService.loadMinDate(productcode, variantcode, dtResult);
+                        if (publicationDate == null)
+                        return null;
+                        else
+                            return dis_publicationCalendarService.loadMinDate(productcode, variantcode, publicationDate.plusDays(1));
+                    }
+                },
         BegOfTheMonth {
             public LocalDate calc(LocalDate date) {
 
@@ -111,25 +96,7 @@ public class BaseDateCalculation {
      * @return date which will be passed to Enum
      * @throws SQLException Sql
      */
-    public LocalDate loadMinDate(Connection conn, String productCode, String variantCode, LocalDate publicationDate) throws SQLException {
-        PreparedStatement statement = conn.prepareStatement("SELECT  MIN(PUBLICATIONDATE) FROM sysadm.DIS_PUBLICATIONCALENDAR" +
-                "    WHERE DELIVERYPARTNERNO = 0 AND PRODUCTCODE = ? AND + VARIANTCODE = ? AND PUBLICATIONDATE >= ?");
 
-        statement.setString(1, productCode);
-        statement.setString(2, variantCode);
-        statement.setDate(3, Date.valueOf(publicationDate));
-        ResultSet results = statement.executeQuery();
-        Date minDate = null;
-        while (results.next()) {
-            minDate = results.getDate("PUBLICATIONDATE");
-        }
-        results.close();
-        statement.close();
-        if (minDate != null)
-            return minDate.toLocalDate();
-        else
-            return null;
-    }
     /**
      * Getter and Setter
      */
