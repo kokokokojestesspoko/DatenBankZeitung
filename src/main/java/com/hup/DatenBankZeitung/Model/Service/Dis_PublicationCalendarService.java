@@ -1,6 +1,5 @@
 package com.hup.DatenBankZeitung.Model.Service;
 
-import com.hup.DatenBankZeitung.Model.Overview.Overview;
 import com.hup.DatenBankZeitung.Model.Tabelle.Dis_PublicationCalendar;
 import com.hup.DatenBankZeitung.Repository.Dis_PublicationCalendarRepository;
 
@@ -12,10 +11,15 @@ import java.util.List;
 
 @Service
 public class Dis_PublicationCalendarService {
-    @Autowired
-    Dis_PublicationCalendarRepository dis_publicationCalendarRepository;
 
-    List<Dis_PublicationCalendar> findMinDate(String productcode, String variantcode, LocalDate dtResult)
+
+
+    Dis_PublicationCalendarRepository dis_publicationCalendarRepository;
+    @Autowired
+    public Dis_PublicationCalendarService(Dis_PublicationCalendarRepository dis_publicationCalendarRepository) {
+    }
+
+    public List<Dis_PublicationCalendar> findMinDate(String productcode, String variantcode, LocalDate dtResult)
     {
         return dis_publicationCalendarRepository.findMinPublicationDate(productcode,variantcode,dtResult);
     }
@@ -35,11 +39,7 @@ public class Dis_PublicationCalendarService {
         {
             date = dis_publicationCalendar.getPublicationdate();
         }
-        if(date != null)
-            return date;
-        else
-          return  null;
-
+       return date;
     }
 
 

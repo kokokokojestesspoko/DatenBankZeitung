@@ -22,6 +22,8 @@ public class BaseDateCalculation {
     }
 
 
+//RESULT wie rein?
+
     /**
      * Enum to manage date by referencekey
      * EVT - with the next possible day

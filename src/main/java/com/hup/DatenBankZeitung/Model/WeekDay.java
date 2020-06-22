@@ -16,6 +16,8 @@ public class WeekDay {
     private int numberToBinary = 0;
     private HashSet<DayOfWeek> dayOfWeeks = new HashSet<>();
 
+    public WeekDay() {
+    }
 
     public WeekDay(int numberToBinary) {
         this.numberToBinary = numberToBinary;
@@ -103,7 +105,7 @@ public class WeekDay {
      * @param localDate it the date we will check
      * @return boolean with validation.
      */
-    public boolean isValid(LocalDate localDate) {
+    public  boolean isValid(LocalDate localDate) {
         return dayOfWeeks.contains(localDate.getDayOfWeek());
     }
 }
