@@ -16,7 +16,7 @@ public interface Hupx_DuedatecodeRepository extends JpaRepository<Hupx_Duedateco
 
     @Query(value = "SELECT MAX( defaulttime ) FROM Hupx_Duedatecode" +
             "  WHERE systemcode = ?1 AND duedatecode = ?2 AND  ?3 BETWEEN startdate AND enddate")                       //removed count
-    List<Hupx_Duedatecode> findByDeafultTime(int systemcode,String duedatecode,LocalDate today);
+    List<Hupx_Duedatecode> findByDeafultTime(String systemcode, String duedatecode, LocalDate today);
 //COUNT
 
 }

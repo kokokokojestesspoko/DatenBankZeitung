@@ -6,21 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Service
 public class HupProductiondateService {
     @Autowired
     Hup_ProductiondateRepository hup_productiondateRepository;
-
-    List<Hup_Productiondate> findProductiondate(LocalDate productiondate)
+    public LocalDate loadProductiondate()
     {
-        return hup_productiondateRepository.findByProductiondate(productiondate);
+        return LocalDate.now();
     }
-
-    public LocalDate loadDtToday(LocalDate productiondate)
+    //Am besten im PublicationcalendarService eine neue Methode bauen: public LocalDate getProductionDate() und diese dann nutzen (als dtToday - Ersatz)
+    public LocalDate loadDtToday(LocalDate loadProductiondate)
     {   LocalDate date = null;
-        for(Hup_Productiondate hup_productiondate : hup_productiondateRepository.findByProductiondate(productiondate))
+        for(Hup_Productiondate hup_productiondate : hup_productiondateRepository.findByProductiondate(loadProductiondate))
         {
         date = hup_productiondate.getProductiondate();
         }

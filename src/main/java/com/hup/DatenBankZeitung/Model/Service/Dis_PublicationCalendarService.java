@@ -31,6 +31,26 @@ public class Dis_PublicationCalendarService {
     {
         return dis_publicationCalendarRepository.findPublicationdateMoreThanResult(  productcode,variantcode,  dtResult);
     }
+    public LocalDate loaddtResult(String productcode, String variantcode,LocalDate publicationdate)
+    {
+        LocalDate date = null;
+        for(Dis_PublicationCalendar dis_publicationCalendar: dis_publicationCalendarRepository.findMinPublicationDateBiggerThanPublicationdate(productcode,variantcode,publicationdate))
+        {
+            date = dis_publicationCalendar.getPublicationdate();
+        }
+        return date;
+    }
+    public LocalDate dtResultCheckifnotnull(String productcode, String variantcode,LocalDate publicationdate)
+    {   LocalDate date;
+        if(loaddtResult(productcode,variantcode,publicationdate) != null)
+        {
+            date = loaddtResult(productcode,variantcode,publicationdate);
+            return date;
+        }
+        else
+            date = LocalDate.of(1990,01,01);
+            return date;
+    }
 
     public LocalDate loadMinDate(String productcode, String variantcode,LocalDate dtResult)
     {

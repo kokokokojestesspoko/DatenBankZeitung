@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -57,6 +58,13 @@ public class Hupx_DueDateProduct2CodeService {
 
         }
         return  referenceValue;
+    }
+    public int counterFromKeys(String productcode, String systemcode, String duedatecode, int nCompanyClientNo, LocalDate dtToday)
+    {
+        List<Hupx_DueDateProduct2Code> list = new ArrayList<>();
+        list = hupx_dueDateProduct2CodeRepository.findKeysByCodes(productcode,systemcode,duedatecode,nCompanyClientNo,dtToday);
+        int counter = list.size();
+        return counter;
     }
 }
 

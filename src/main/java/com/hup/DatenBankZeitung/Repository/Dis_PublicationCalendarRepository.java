@@ -29,4 +29,8 @@ public interface Dis_PublicationCalendarRepository extends JpaRepository<Dis_Pub
             " =?1 and variantcode = ?2 and publicationdate > ?3 order by publicationdate asc")
     List<Dis_PublicationCalendar> findPublicationdateMoreThanResult( String productcode, String variantcode, LocalDate dtResult);
 
+    @Query(value = "      SELECT  MIN( publicationdate )  FROM Dis_PublicationCalendar" +
+            "      WHERE deliverypartnerno = 0 AND productcode = ?1 AND" +
+            "        variantcode = ?2 AND publicationdate >= ?3 ")
+    List<Dis_PublicationCalendar> findMinPublicationDateBiggerThanPublicationdate(String productcode, String variantcode,LocalDate publicationdate);
 }
