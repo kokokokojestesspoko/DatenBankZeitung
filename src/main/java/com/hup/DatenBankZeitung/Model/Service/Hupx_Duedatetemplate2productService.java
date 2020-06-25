@@ -18,12 +18,5 @@ public class Hupx_Duedatetemplate2productService {
     {
         return hupx_duedatetemplate2productRepository.findValuesBeetwenDates( productcode, systemcode,  duedatecode, companyclientno,dtToday);
     }
-    public int loadOffsetkey(String productcode, String systemcode, String duedatecode, int nCompanyClientNo, LocalDate dtToday)
-        {  int offsetkey = 0;
-            for(Hupx_Duedatetemplate2product hupx_duedatetemplate2product : hupx_duedatetemplate2productRepository.findValuesBeetwenDates(productcode,systemcode,duedatecode,nCompanyClientNo,dtToday))
-            {
-                offsetkey = hupx_duedatetemplate2product.get();
-            }
-            return  offsetkey;
-    }
+
 }

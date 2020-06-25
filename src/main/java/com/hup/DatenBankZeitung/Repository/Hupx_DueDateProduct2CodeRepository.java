@@ -1,6 +1,7 @@
 package com.hup.DatenBankZeitung.Repository;
 
 import com.hup.DatenBankZeitung.Model.Tabelle.Hupx_DueDateProduct2Code;
+import com.hup.DatenBankZeitung.Model.Tabelle.Hupx_Duedatetemplate2product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -17,4 +18,10 @@ public interface Hupx_DueDateProduct2CodeRepository extends JpaRepository<Hupx_D
           "        ?5 BETWEEN startdate AND enddate")
     List<Hupx_DueDateProduct2Code> findKeysByCodes(String productcode, String systemcode, String duedatecode, int nCompanyClientNo, LocalDate dtToday);
     //COUNT
+
+  @Query(value = "select max(b.offsetkey),max(b.offsetvalue),max(b.referencekey),max(b.weekdaykey),max(b.referencevalue)" +
+          " from Hupx_Duedatetemplate2product a, Hupx_Duedatetemplate2code b where a.productcode = ?1 AND b.duedatetemplatecode = a.duedatetemplatecode " +
+          "AND b.systemcode = ?2 and b.duedatecode = ?3 and b.companyclientno = ?4 and ?5 between a.startdate and a.enddate and ?5 between b.startdate and b.enddate ")
+  List<Hupx_DueDateProduct2Code> findValuesBeetwenDates(String productcode, String systemcode, String duedatecode, int companyclientno, LocalDate dtToday);
 }
+

@@ -25,9 +25,25 @@ public class Hupx_DueDateProduct2CodeService {
         }
         return offsetKey;
     }
+    public int loadOffsetKeyBetweenDates(String productcode, String systemcode, String duedatecode, int nCompanyClientNo, LocalDate dtToday)
+    {  int offsetKey = 0;
+        for(Hupx_DueDateProduct2Code hupx_dueDateProduct2Code: hupx_dueDateProduct2CodeRepository.findValuesBeetwenDates(productcode,systemcode,duedatecode,nCompanyClientNo,dtToday))
+        {
+            offsetKey = hupx_dueDateProduct2Code.getOffsetkey();
+        }
+        return offsetKey;
+    }
     public int loadoffsetValue(String productcode, String systemcode, String duedatecode, int nCompanyClientNo, LocalDate dtToday)
     {  int offsetValue = 0;
         for(Hupx_DueDateProduct2Code hupx_dueDateProduct2Code: hupx_dueDateProduct2CodeRepository.findKeysByCodes(productcode,systemcode,duedatecode,nCompanyClientNo,dtToday))
+        {
+            offsetValue = hupx_dueDateProduct2Code.getOffsetvalue();
+        }
+        return offsetValue;
+    }
+    public int loadoffsetValueBetweenDates(String productcode, String systemcode, String duedatecode, int nCompanyClientNo, LocalDate dtToday)
+    {  int offsetValue = 0;
+        for(Hupx_DueDateProduct2Code hupx_dueDateProduct2Code: hupx_dueDateProduct2CodeRepository.findValuesBeetwenDates(productcode,systemcode,duedatecode,nCompanyClientNo,dtToday))
         {
             offsetValue = hupx_dueDateProduct2Code.getOffsetvalue();
         }
@@ -41,9 +57,25 @@ public class Hupx_DueDateProduct2CodeService {
         }
         return referenceKey;
     }
+    public int loadReferenceKeyBetweenDates(String productcode, String systemcode, String duedatecode, int nCompanyClientNo, LocalDate dtToday)
+    {  int referenceKey = 0;
+        for(Hupx_DueDateProduct2Code hupx_dueDateProduct2Code: hupx_dueDateProduct2CodeRepository.findValuesBeetwenDates(productcode,systemcode,duedatecode,nCompanyClientNo,dtToday))
+        {
+            referenceKey = hupx_dueDateProduct2Code.getReferencekey();
+        }
+        return referenceKey;
+    }
     public int loadWeekdayKey(String productcode, String systemcode, String duedatecode, int nCompanyClientNo, LocalDate dtToday)
     {  int weekdayKey = 0;
         for(Hupx_DueDateProduct2Code hupx_dueDateProduct2Code: hupx_dueDateProduct2CodeRepository.findKeysByCodes(productcode,systemcode,duedatecode,nCompanyClientNo,dtToday))
+        {
+            weekdayKey = hupx_dueDateProduct2Code.getWeekdaykey();
+        }
+        return  weekdayKey;
+    }
+    public int loadWeekdayKeyBetweenDates(String productcode, String systemcode, String duedatecode, int nCompanyClientNo, LocalDate dtToday)
+    {  int weekdayKey = 0;
+        for(Hupx_DueDateProduct2Code hupx_dueDateProduct2Code: hupx_dueDateProduct2CodeRepository.findValuesBeetwenDates(productcode,systemcode,duedatecode,nCompanyClientNo,dtToday))
         {
             weekdayKey = hupx_dueDateProduct2Code.getWeekdaykey();
         }
@@ -59,6 +91,16 @@ public class Hupx_DueDateProduct2CodeService {
         }
         return  referenceValue;
     }
+    public String loadreferenceValueBetweenDates(String productcode, String systemcode, String duedatecode, int nCompanyClientNo, LocalDate dtToday)
+    {  String referenceValue = null;
+
+        for(Hupx_DueDateProduct2Code hupx_dueDateProduct2Code: hupx_dueDateProduct2CodeRepository.findValuesBeetwenDates(productcode,systemcode,duedatecode,nCompanyClientNo,dtToday))
+        {
+            referenceValue = hupx_dueDateProduct2Code.getReferencevalue();
+
+        }
+        return  referenceValue;
+    }
     public int counterFromKeys(String productcode, String systemcode, String duedatecode, int nCompanyClientNo, LocalDate dtToday)
     {
         List<Hupx_DueDateProduct2Code> list = new ArrayList<>();
@@ -66,5 +108,6 @@ public class Hupx_DueDateProduct2CodeService {
         int counter = list.size();
         return counter;
     }
+
 }
 

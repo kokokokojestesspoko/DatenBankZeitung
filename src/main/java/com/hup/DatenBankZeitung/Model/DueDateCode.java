@@ -92,7 +92,11 @@ public class DueDateCode {
                 weekdaykey = hupx_dueDateProduct2CodeService.loadWeekdayKey(productCode, systemCode, dueDateCode, companyClientNo, dtToday);
                 referencevalue = hupx_dueDateProduct2CodeService.loadreferenceValue(productCode, systemCode, dueDateCode, companyClientNo, dtToday);
                 if (hupx_dueDateProduct2CodeService.counterFromKeys(productCode, systemCode, dueDateCode, companyClientNo, dtToday) == 0) {
-                    // Duedatetemplate2productService.getOffsetkey usw.
+                    offsetkey = hupx_dueDateProduct2CodeService.loadOffsetKeyBetweenDates(productCode, systemCode, dueDateCode, companyClientNo, dtToday);
+                    offsetvalue = hupx_dueDateProduct2CodeService.loadoffsetValueBetweenDates(productCode, systemCode, dueDateCode, companyClientNo, dtToday);
+                    referencekey = hupx_dueDateProduct2CodeService.loadReferenceKeyBetweenDates(productCode, systemCode, dueDateCode, companyClientNo, dtToday);
+                    weekdaykey = hupx_dueDateProduct2CodeService.loadWeekdayKeyBetweenDates(productCode, systemCode, dueDateCode, companyClientNo, dtToday);
+                    referencevalue = hupx_dueDateProduct2CodeService.loadreferenceValueBetweenDates(productCode, systemCode, dueDateCode, companyClientNo, dtToday);
                 }
                 if (hupx_dueDateProduct2CodeService.counterFromKeys(productCode, systemCode, dueDateCode, companyClientNo, dtToday) != 1)//? before 0 and now this?
                 {
@@ -125,7 +129,7 @@ public class DueDateCode {
             {
                 dtResult = dtPublicationDate;
             }
-            if( referencekey == 3 || referencekey== 4 || referencekey== 23 || referencekey== 24   )
+            if( referencekey == 3 || referencekey== 4 || referencekey== 23 || referencekey== 24 )
             {
                 //should be basecalculationkeycalled?
             }
