@@ -26,11 +26,15 @@ public class DueDateCode {
     public DueDateCode() {
     }
 
-    public DueDateCode(String productCode, String systemCode, String dueDateCode, int companyClientNoIn, LocalDate startDate, String variantCode, Hupx_DueDateProduct2CodeService hupx_dueDateProduct2CodeService, Dis_PublicationCalendarService dis_publicationCalendarService) {
+    public DueDateCode(String productCode, String systemCode, int companyClientNoIn,  LocalDate startDate, String variantCode,
+                       String dueDateCode) {
         this.productCode = productCode;
-        loadCalculations(productCode, systemCode, dueDateCode, companyClientNoIn, startDate, variantCode, hupx_dueDateProduct2CodeService, dis_publicationCalendarService);
-        validation(dis_publicationCalendarService);
-
+        this.systemCode = systemCode;
+        this.companyClientNoIn = companyClientNoIn;
+        this.startDate = startDate;
+        this.variantCode = variantCode;
+        this.dueDateCode = dueDateCode;
+        logik();
     }
 
     public LocalDate validation(Dis_PublicationCalendarService dis_publicationCalendarService) {
@@ -92,7 +96,7 @@ public class DueDateCode {
                     weekdaykey = hupx_dueDateProduct2CodeService.loadWeekdayKeyBetweenDates(productCode, systemCode, dueDateCode, companyClientNo, dtToday);
                     referencevalue = hupx_dueDateProduct2CodeService.loadreferenceValueBetweenDates(productCode, systemCode, dueDateCode, companyClientNo, dtToday);
                 }
-                if (hupx_dueDateProduct2CodeService.counterFromKeys(productCode, systemCode, dueDateCode, companyClientNo, dtToday) != 1)//? before 0 and now this?
+                if (hupx_dueDateProduct2CodeService.counterFromKeys(productCode, systemCode, dueDateCode, companyClientNo, dtToday) != 1)
                 {
                     bCalculate = 0;
                 } else if (referencekey != 1 || referencekey != 2 || referencekey != 3 || referencekey != 4 || referencekey != 5 || referencekey != 20 || referencekey != 23
@@ -126,18 +130,6 @@ public class DueDateCode {
             }
             weekDay = new WeekDay(weekdaykey);
         }
-    }
-
-    public WeekDay getWeekDay() {
-        return weekDay;
-    }
-
-    public void setWeekDay(WeekDay weekDay) {
-        this.weekDay = weekDay;
-    }
-
-    public String getDueDateCode() {
-        return dueDateCode;
     }
 
     /**
@@ -196,4 +188,34 @@ public class DueDateCode {
             return baseDateCalculation = new BaseDateCalculation(BaseDateCalculation.BaseDateCalculationKey.noAction, variantCode, productCode, dis_publicationCalendarService);//
     }
 
+    public BaseDateCalculation getBaseDateCalculation() {
+        return baseDateCalculation;
+    }
+
+    public void setBaseDateCalculation(BaseDateCalculation baseDateCalculation) {
+        this.baseDateCalculation = baseDateCalculation;
+    }
+
+    public Offset getOffset() {
+        return offset;
+    }
+
+    public void setOffset(Offset offset) {
+        this.offset = offset;
+    }
+    public WeekDay getWeekDay() {
+        return weekDay;
+    }
+
+    public void setWeekDay(WeekDay weekDay) {
+        this.weekDay = weekDay;
+    }
+
+    public String getDueDateCode() {
+        return dueDateCode;
+    }
+
+    public void setDueDateCode(String dueDateCode) {
+        this.dueDateCode = dueDateCode;
+    }
 }
