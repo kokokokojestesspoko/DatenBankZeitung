@@ -1,7 +1,6 @@
 package com.hup.DatenBankZeitung.Model.Tabelle;
-import com.hup.DatenBankZeitung.Model.Tabelle.PK.PK_HUPX_DUEDATECODE;
-import com.hup.DatenBankZeitung.Model.Tabelle.PK.PK_HUP_DUEDATE;
 
+import com.hup.DatenBankZeitung.Model.Tabelle.PK.PK_HUP_DUEDATE;
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -11,6 +10,7 @@ import java.time.LocalDate;
 public class Hup_Duedate {
     public Hup_Duedate() {
     }
+
     @EmbeddedId
     private PK_HUP_DUEDATE pk_hup_duedate;
     @Column(name = "RECNO")

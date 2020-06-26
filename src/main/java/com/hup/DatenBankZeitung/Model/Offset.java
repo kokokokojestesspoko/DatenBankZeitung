@@ -15,7 +15,6 @@ public class Offset {
     }
 
 
-
     public LocalDate calc(LocalDate refDate)
     {
         return offSetKey.calc(refDate,offSetValue);
@@ -80,9 +79,6 @@ public class Offset {
         }
 }
 
-
- 
-
     public void setoffSetValue(int offSetValue) {
         this.offSetValue = offSetValue;
     }
@@ -98,6 +94,4 @@ public class Offset {
     public int getoffSetValue() {
         return offSetValue;
     }
-
-
 }

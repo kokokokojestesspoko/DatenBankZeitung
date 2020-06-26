@@ -1,4 +1,5 @@
 package com.hup.DatenBankZeitung.Model.Tabelle;
+
 import com.hup.DatenBankZeitung.Model.Tabelle.PK.PK_HUPX_DUEDATETEMPLATE2CODE;
 
 import javax.persistence.*;
@@ -13,31 +14,31 @@ public class Hupx_Duedatetemplate2code {
 
     @EmbeddedId
     private PK_HUPX_DUEDATETEMPLATE2CODE pk_hupx_duedatetemplate2CODE;
-    @Column(name="RECNO")
+    @Column(name = "RECNO")
     private int recno;
-    @Column(name="SORTKEY")
+    @Column(name = "SORTKEY")
     private int sortkey;
-    @Column(name="DUEDATETEMPLATECODE")
+    @Column(name = "DUEDATETEMPLATECODE")
     private String duedatetemplatecode;
-    @Column(name="SYSTEMCODE")
+    @Column(name = "SYSTEMCODE")
     private String systemcode;
-    @Column(name="DUEDATECODE")
+    @Column(name = "DUEDATECODE")
     private String duedatecode;
-    @Column(name="STARTDATE")
+    @Column(name = "STARTDATE")
     private LocalDate startdate;
-    @Column(name="ENDDATE")
+    @Column(name = "ENDDATE")
     private LocalDate enddate;
-    @Column(name="OFFSETKEY")
+    @Column(name = "OFFSETKEY")
     private int offsetkey;
-    @Column(name="OFFSETVALUE")
+    @Column(name = "OFFSETVALUE")
     private int offsetvalue;
-    @Column(name="REFERENCEKEY")
+    @Column(name = "REFERENCEKEY")
     private int referencekey;
-    @Column(name="WEEKDAYKEY")
+    @Column(name = "WEEKDAYKEY")
     private int weekdaykey;
-    @Column(name="REFERENCEVALUE")
+    @Column(name = "REFERENCEVALUE")
     private String referencevalue;
-    @Column(name="COMPANYCLIENTNO")
+    @Column(name = "COMPANYCLIENTNO")
     private int companyclientno;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "duedatetemplatecode", nullable = false)

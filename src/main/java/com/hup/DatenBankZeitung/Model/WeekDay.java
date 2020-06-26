@@ -1,6 +1,5 @@
 package com.hup.DatenBankZeitung.Model;
 
-
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.*;
@@ -105,7 +104,7 @@ public class WeekDay {
      * @param localDate it the date we will check
      * @return boolean with validation.
      */
-    public  boolean isValid(LocalDate localDate) {
+    public boolean isValid(LocalDate localDate) {
         return dayOfWeeks.contains(localDate.getDayOfWeek());
     }
 }

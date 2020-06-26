@@ -1,4 +1,5 @@
 package com.hup.DatenBankZeitung.Model.Tabelle;
+
 import com.hup.DatenBankZeitung.Model.Tabelle.PK.PK_HUPX_DUEDATETEMPLATE2PRODUCT;
 
 import javax.persistence.*;
@@ -30,15 +31,15 @@ public class Hupx_Duedatetemplate2product {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Hupx_DueDateProduct2Code> hupx_dueDateProduct2Codes;
 
-    public Hupx_Duedatetemplate2product(PK_HUPX_DUEDATETEMPLATE2PRODUCT pk_hupx_duedatetemplate2PRODUCT,int recno,
-                                        int sortkey,String duedatetemplatecode,String productcode, LocalDate startdate,LocalDate enddate) {
-    this.pk_hupx_duedatetemplate2PRODUCT = pk_hupx_duedatetemplate2PRODUCT;
-    this.recno = recno;
-    this.sortkey = sortkey;
-    this.duedatetemplatecode = duedatetemplatecode;
-    this.productcode = productcode;
-    this.startdate = startdate;
-    this.enddate = enddate;
+    public Hupx_Duedatetemplate2product(PK_HUPX_DUEDATETEMPLATE2PRODUCT pk_hupx_duedatetemplate2PRODUCT, int recno,
+                                        int sortkey, String duedatetemplatecode, String productcode, LocalDate startdate, LocalDate enddate) {
+        this.pk_hupx_duedatetemplate2PRODUCT = pk_hupx_duedatetemplate2PRODUCT;
+        this.recno = recno;
+        this.sortkey = sortkey;
+        this.duedatetemplatecode = duedatetemplatecode;
+        this.productcode = productcode;
+        this.startdate = startdate;
+        this.enddate = enddate;
     }
 
     public PK_HUPX_DUEDATETEMPLATE2PRODUCT getPk_hupx_duedatetemplate2PRODUCT() {

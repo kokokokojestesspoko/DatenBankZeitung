@@ -18,5 +18,4 @@ public class Hupx_Duedatetemplate2productService {
     {
         return hupx_duedatetemplate2productRepository.findValuesBeetwenDates( productcode, systemcode,  duedatecode, companyclientno,dtToday);
     }
-
 }

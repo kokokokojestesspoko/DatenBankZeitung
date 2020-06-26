@@ -1,6 +1,5 @@
 package com.hup.DatenBankZeitung.Model.Tabelle;
 
-
 import com.hup.DatenBankZeitung.Model.Tabelle.PK.PK_HUPX_DUEDATECODE;
 
 import javax.persistence.*;
@@ -34,7 +33,7 @@ public class Hupx_Duedatecode {
     @Column(name = "DEFAULTTIME")
     private int defaulttime;
 
-    public Hupx_Duedatecode(PK_HUPX_DUEDATECODE pk_hupx_duedatecode,int recno, int sortkey, String systemcode, String duedatecode, String description,
+    public Hupx_Duedatecode(PK_HUPX_DUEDATECODE pk_hupx_duedatecode, int recno, int sortkey, String systemcode, String duedatecode, String description,
                             LocalDate startdate, LocalDate enddate, int automaticbatchflag, int defaulttime) {
         this.pk_hupx_duedatecode = pk_hupx_duedatecode;
         this.recno = recno;

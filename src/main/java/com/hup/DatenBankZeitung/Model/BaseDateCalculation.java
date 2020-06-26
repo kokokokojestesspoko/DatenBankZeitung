@@ -6,23 +6,19 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 
 
-
-
 public class BaseDateCalculation {
 
     private BaseDateCalculationKey baseDateCalculationKey;
     private String variantcode;
     private String productcode;
     private Dis_PublicationCalendarService dis_publicationCalendarService;
+
     public BaseDateCalculation(BaseDateCalculationKey baseDateCalculationKey, String variantCode, String productcode, Dis_PublicationCalendarService dis_publicationCalendarService) {
         this.variantcode = variantCode;
         this.productcode = productcode;
         this.baseDateCalculationKey = baseDateCalculationKey;
         this.dis_publicationCalendarService = dis_publicationCalendarService;
     }
-
-
-//RESULT wie rein?
 
     /**
      * Enum to manage date by referencekey
@@ -33,26 +29,22 @@ public class BaseDateCalculation {
      * NoAction does nothing
      */
     public enum BaseDateCalculationKey {
-        EVT
-                {
-                    public LocalDate calc(Dis_PublicationCalendarService dis_publicationCalendarService,
-                                          String productcode,String variantcode, LocalDate dtResult)
-                    {
-                        return  dis_publicationCalendarService.loadMinDate(productcode,variantcode,dtResult);
-                    }
-                },
-        NextEVT
-                {
-                    public LocalDate calc(Dis_PublicationCalendarService dis_publicationCalendarService,
-                                          String productcode,String variantcode, LocalDate dtResult)
-                    {
-                        LocalDate publicationDate = dis_publicationCalendarService.loadMinDate(productcode, variantcode, dtResult);
-                        if (publicationDate == null)
-                        return null;
-                        else
-                            return dis_publicationCalendarService.loadMinDate(productcode, variantcode, publicationDate.plusDays(1));
-                    }
-                },
+        EVT {
+            public LocalDate calc(Dis_PublicationCalendarService dis_publicationCalendarService,
+                                  String productcode, String variantcode, LocalDate dtResult) {
+                return dis_publicationCalendarService.loadMinDate(productcode, variantcode, dtResult);
+            }
+        },
+        NextEVT {
+            public LocalDate calc(Dis_PublicationCalendarService dis_publicationCalendarService,
+                                  String productcode, String variantcode, LocalDate dtResult) {
+                LocalDate publicationDate = dis_publicationCalendarService.loadMinDate(productcode, variantcode, dtResult);
+                if (publicationDate == null)
+                    return null;
+                else
+                    return dis_publicationCalendarService.loadMinDate(productcode, variantcode, publicationDate.plusDays(1));
+            }
+        },
         BegOfTheMonth {
             public LocalDate calc(LocalDate date) {
 

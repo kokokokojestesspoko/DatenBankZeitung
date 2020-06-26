@@ -1,9 +1,6 @@
 package com.hup.DatenBankZeitung.Model.Tabelle;
 
-
 import com.hup.DatenBankZeitung.Model.Tabelle.PK.PK_HUPX_DUEDATEPRODUCT2CODE;
-
-import static java.lang.String.format;
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -11,39 +8,36 @@ import java.time.LocalDate;
 @Table(name = "HUPX_DUEDATEPRODUCT2CODE")
 
 public class Hupx_DueDateProduct2Code {
-    //Empty constructor
 
-
-    public Hupx_DueDateProduct2Code() { //Duedate<----
+    public Hupx_DueDateProduct2Code() {
     }
-
-    @EmbeddedId //Which one is PK? Product,System or DueDate code?// suchen
+    @EmbeddedId
     private PK_HUPX_DUEDATEPRODUCT2CODE pk_hupx_duedateproduct2CODE;
-    @Column(name="RECNO")
+    @Column(name = "RECNO")
     private int recno;
-    @Column(name="SORTKEY")
+    @Column(name = "SORTKEY")
     private int sortkey;
-    @Column(name="PRODUCTCODE")
+    @Column(name = "PRODUCTCODE")
     private String productcode;
-    @Column(name="SYSTEMCODE")
+    @Column(name = "SYSTEMCODE")
     private String systemcode;
-    @Column(name="DUEDATECODE")
+    @Column(name = "DUEDATECODE")
     private String duedatecode;
-    @Column(name="STARTDATE")
+    @Column(name = "STARTDATE")
     private LocalDate startdate;
-    @Column(name="ENDDATE")
+    @Column(name = "ENDDATE")
     private LocalDate enddate;
-    @Column(name="OFFSETKEY")
+    @Column(name = "OFFSETKEY")
     private int offsetkey;
-    @Column(name="OFFSETVALUE")
+    @Column(name = "OFFSETVALUE")
     private int offsetvalue;
-    @Column(name="WEEKDAYKEY")
+    @Column(name = "WEEKDAYKEY")
     private int weekdaykey;
-    @Column(name="REFERENCEKEY")
+    @Column(name = "REFERENCEKEY")
     private int referencekey;
-    @Column(name="REFERENCEVALUE")
+    @Column(name = "REFERENCEVALUE")
     private String referencevalue;
-    @Column(name="COMPANYCLIENTNO")
+    @Column(name = "COMPANYCLIENTNO")
     private int companyclientno;
 
     public Hupx_DueDateProduct2Code(PK_HUPX_DUEDATEPRODUCT2CODE pk_hupx_duedateproduct2CODE, int recno, int sortkey, String productcode, String systemcode, String duedatecode, LocalDate startdate,
@@ -63,8 +57,6 @@ public class Hupx_DueDateProduct2Code {
         this.systemcode = systemcode;
         this.companyclientno = companyclientno;
     }
-
-    //Spring way to create Get/Set?
 
     public PK_HUPX_DUEDATEPRODUCT2CODE getPk_hupx_duedateproduct2CODE() {
         return pk_hupx_duedateproduct2CODE;

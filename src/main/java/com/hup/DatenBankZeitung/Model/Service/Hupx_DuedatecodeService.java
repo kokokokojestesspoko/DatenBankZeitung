@@ -14,30 +14,29 @@ public class Hupx_DuedatecodeService {
     @Autowired
     Hupx_DuedatecodeRepository hupx_duedatecodeRepository;
 
-  public int loadDeafultTime(String systemcode, String duedatecode, LocalDate today){
-      int time = 0;
-    for(Hupx_Duedatecode hupx_duedatecode : hupx_duedatecodeRepository.findByDeafultTime(systemcode,duedatecode,today))
-    {
-        time  = hupx_duedatecode.getDefaulttime();
+    public int loadDeafultTime(String systemcode, String duedatecode, LocalDate today) {
+        int time = 0;
+        for (Hupx_Duedatecode hupx_duedatecode : hupx_duedatecodeRepository.findByDeafultTime(systemcode, duedatecode, today)) {
+            time = hupx_duedatecode.getDefaulttime();
+        }
+        return time;
     }
-       return time;
-  }
-    // GET A COUNTER
-    public int getnCounter(String systemcode, String duedatecode, LocalDate today){
+
+    public int getnCounter(String systemcode, String duedatecode, LocalDate today) {
         List<Hupx_Duedatecode> list = new ArrayList();
         list = hupx_duedatecodeRepository.findByDeafultTime(systemcode, duedatecode, today);
         int count = list.size();
         return count;
     }
-    public int getbCalculate(int getnCounter){
-        if(getnCounter == 1)
+
+    public int getbCalculate(int getnCounter) {
+        if (getnCounter == 1)
             return 1;
-            else
-                return 0;
-    }
-    public LocalDate setMinDate()
-    {
-        return LocalDate.of(1990,01,01);
+        else
+            return 0;
     }
 
+    public LocalDate setMinDate() {
+        return LocalDate.of(1990, 01, 01);
+    }
 }

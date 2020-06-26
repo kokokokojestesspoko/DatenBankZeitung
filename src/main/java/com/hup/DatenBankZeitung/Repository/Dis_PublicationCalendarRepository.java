@@ -9,10 +9,6 @@ import java.util.List;
 
 public interface Dis_PublicationCalendarRepository extends JpaRepository<Dis_PublicationCalendar, Integer> {
 
-
-
-
-
     @Query(value = "      SELECT  MIN( publicationdate )  FROM Dis_PublicationCalendar" +
             "      WHERE deliverypartnerno = 0 AND productcode = ?1 AND" +
             "        variantcode = ?2 AND publicationdate >= ?3 ")
