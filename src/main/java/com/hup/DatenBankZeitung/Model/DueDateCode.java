@@ -34,7 +34,7 @@ public class DueDateCode {
         this.startDate = startDate;
         this.variantCode = variantCode;
         this.dueDateCode = dueDateCode;
-        logik();
+
     }
 
     public LocalDate validation(Dis_PublicationCalendarService dis_publicationCalendarService) {
@@ -62,7 +62,7 @@ public class DueDateCode {
 //            return date;
 //    }*//
 
-    public void logik() {
+    public LocalDate logik() {
         LocalDate dtMinDate = null;
         LocalDate dtPublicationDate = null;
         LocalDate dtResult = null;
@@ -100,7 +100,7 @@ public class DueDateCode {
                 {
                     bCalculate = 0;
                 } else if (referencekey != 1 || referencekey != 2 || referencekey != 3 || referencekey != 4 || referencekey != 5 || referencekey != 20 || referencekey != 23
-                        || referencekey != 24 || referencekey != 25 || offsetkey < 1 & offsetkey > 5 || weekdaykey < 1 & weekdaykey > 127) {
+                        || referencekey != 24 || referencekey != 25 || offsetkey > 1 && offsetkey < 5 || weekdaykey > 1 & weekdaykey < 127) {
                     bCalculate = 0;
                 }
             }
@@ -125,11 +125,19 @@ public class DueDateCode {
             if (referencekey == 3 || referencekey == 4 || referencekey == 23 || referencekey == 24) {
                 baseDateCalculation = baseDateCalculationDueDate(referencekey, productCode, variantCode, dis_publicationCalendarService);
             }
-            if (bCalculate == 1 & offsetvalue != 0) {
-                offset = offsetKey(offsetkey, startDate, offsetvalue);
+            if (bCalculate == 1 && offsetvalue != 0) {
+                offset = offsetKey(offsetkey, offsetvalue);
+
             }
             weekDay = new WeekDay(weekdaykey);
+            dtResult = baseDateCalculation.getBaseDateCalculationKey().calc(dtResult);
+         //   dtResult = offset.calc(dtResult);
+            if (weekDay.isValid(dtResult)) {
+                return offset.calc(dtResult);
+            } else
+                return dtResult;
         }
+        return dtResult;
     }
 
     /**
@@ -141,9 +149,9 @@ public class DueDateCode {
         int referenceKey = hupx_dueDateProduct2CodeService.loadReferenceKey(productCode, systemCode, dueDateCode, companyClientNo, startDate);
         ;
         int weekdayKey = hupx_dueDateProduct2CodeService.loadWeekdayKey(productCode, systemCode, dueDateCode, companyClientNo, startDate);
-        String referenceValue = hupx_dueDateProduct2CodeService.loadreferenceValue(productCode, systemCode, dueDateCode, companyClientNo, startDate);//wozu?
+        String referenceValue = hupx_dueDateProduct2CodeService.loadreferenceValue(productCode, systemCode, dueDateCode, companyClientNo, startDate);
 
-        offset = offsetKey(offsetKey, startDate, offsetValue);
+        offset = offsetKey(offsetKey,  offsetValue);
         weekDay = new WeekDay(weekdayKey);
         baseDateCalculation = baseDateCalculationDueDate(referenceKey, productCode, variantCode, dis_publicationCalendarService);
     }
@@ -153,7 +161,7 @@ public class DueDateCode {
      *
      * @return
      */
-    private Offset offsetKey(int offsetKey, LocalDate startDate, int offsetValue) {
+    private Offset offsetKey(int offsetKey,  int offsetValue) {
         if (offsetKey == 1) {
             return offset = new Offset(offsetValue, Offset.OffSetKey.DAY);//
         } else if (offsetKey == 2) {
